@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='Style.css') }}"/>
+    <title>Document</title>
+</head>
+<body>
+    {%if nohay%}
+    <div  id="container" style="background-image: url({{fondo}});">
+        <h1>Aun no se ha creado ninguna diapocitiva</h1> 
+    
+    </div>
+    {%else%}
+    <div  id="container" style="background-image: url({{fondo}});">
+        {%if fondo%}
+        <img class="FondoImg" src="{{ url_for('static', filename=fondo) }}" alt="Fondo">
+        
+        {%endif%}
+        {%if titulo%}
+        <h1 class="titulo">{{titulo}}</h1>
+        {%if texto%}
+        <p class="texto">{{texto}}</p>
+        {%endif%}
+        {%endif%}
+        {%if imagen%}
+        <img class="ImagenDiapo" src="{{ url_for('static', filename=imagen) }}" alt="">
+        {%endif%}   
+    
+    </div>
+    
+    <br>
+    {%if sigue%}
+    {%if sigue == -1%}
+    <h5>No hay diapositiva siguiente</h5>
+    {%else%}
+    <h3>Siguiente: {{sigue}}</h3>
+    <a href="/Siguiente/{{sigue}}"> <button>Siguiente</button></a>
+    {%endif%}
+    {%endif%}
+    {%if antes%}
+    {%if antes == -1%}
+    <h5>No hay diapositiva anterior</h5>
+    {%else%}
+    
+    <h3>Antes: {{antes}}</h3>
+    <a href="/Anterior/{{antes}}"> <button>Siguiente</button></a>
+    {%endif%}
+    {%endif%}
+    {%endif%}
+</body>
+</html>

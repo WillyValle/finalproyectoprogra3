@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <table>
+        <thead>
+            <tr>
+                <td>Nodo</td>
+                {%if columnas%}
+                {%for columna in columnas%}
+                    <td>{{columna}}</td>
+                {%endfor%}
+                {%else%}
+                <td>Sin nodos por mostrar</td>
+                {%endif%}
+            </tr>
+        </thead>
+        <tbody>
+            {%for dato in data%}
+            <tr>
+                {%for d in dato%}
+                <td>{{d}}</td>
+              {%endfor%}
+            </tr>
+            {%endfor%}
+        </tbody>
+
+    </table>
+</body>
+</html>

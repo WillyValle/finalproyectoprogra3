@@ -1,0 +1,46 @@
+*{
+    margin: 0px;
+    padding: 0px;
+}
+
+body{
+
+}
+
+
+#container{
+    width: 80%;
+    height: 600px;
+    margin: 0px auto;
+    /*border: 1px solid black;*/
+}
+.titulo{
+    position: relative;
+    z-index: 10;
+    bottom: 99%;
+    height: 0px;
+    color: greenyellow;
+}
+.texto{
+    position: relative;
+    z-index: 10;
+    bottom: 80%;
+    height: 0px;
+    color: greenyellow;
+}
+.FondoImg{
+    width: 100%;
+    height: 100%;
+    position: relative;
+    z-index: -1000;
+}
+
+.ImagenDiapo{
+    width: 35%;
+    height: 35%;
+    position: relative;
+    z-index: 8;
+    bottom: 45%;
+    left: 10%;
+}
+

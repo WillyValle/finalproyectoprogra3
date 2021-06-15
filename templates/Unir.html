@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <script>
+        function noiguales() {
+        valor = document.getElementById("nodo1").value;
+        valor1 = document.getElementById("nodo2").value;
+        if (valor1==valor) {
+        // Si no se cumple la condicion...
+        alert('No se puede conectar un nodo a si mismo.');
+        return false;
+        }else if(valor1!=valor){
+            alert('Union creada');
+            return true;
+        }
+        
+        }
+  
+    </script>
+    <form action="/UnirNodos" name="nodos" method="POST" onsubmit="return noiguales()">
+        <select name="nodo1" id="nodo1" >
+            {%if data%}
+            {%for nodo in data%}
+            <option value="{{nodo}}">{{nodo}}</option>
+            {%endfor%}
+            {%else%}
+            <option >Sin nodos disponibles</option>
+            {%endif%}
+        </select>
+        <select name="nodo2" id="nodo2" >
+            {%if data1%}
+            {%for nodo1 in data1%}
+            <option value="{{nodo1}}">{{nodo1}}</option>
+            {%endfor%}
+            {%else%}
+            <option >Sin nodos disponibles</option>
+            {%endif%}
+        </select>
+        <input type="submit"  >
+    </form>
+</body>
+</html>

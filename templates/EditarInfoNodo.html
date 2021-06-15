@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h3>{{name}}</h3>
+    <form enctype="multipart/form-data" action="/GuardarInfo" method="POST">
+        <label for="Titulo">Titulo: </label>
+    {%if Titulo%}
+        <input type="text" name ="Titulo" value="{{Titulo}}" >
+    {%else%}
+        <input type="text" name ="Titulo">
+    {%endif%}
+        <label for="Texto">Texto: </label>
+    {%if texto%}
+        <input type="text" name ="Texto" value="{{texto}}" >
+    {%else%}
+        <input type="text" name ="Texto">
+    {%endif%}
+        <label for="Fondo">Fondo: </label>
+    {%if fondo%}
+    <img height="250" width="250" src="{{ url_for('static', filename=fondo) }}" alt="" name="Fondo">
+        <input type="file" name ="Fondo3">
+        <input type="text" name ="Fondo" value="{{fondo}}" hidden>
+    {%else%}
+        <input type="file" name ="Fondo3">
+    {%endif%}
+        <label for="Imagen">Imagen: </label>
+    {%if imagen%}
+        <img height="250" width="250" src="{{ url_for('static', filename=imagen) }}" alt="" name="Imagen">
+        <input type="file" name ="Imagen3">
+        <input type="text" name ="Imagen" value="{{imagen}}" hidden>
+    {%else%}
+          <input type="file" name ="Imagen3">
+    {%endif%}
+    <input type="text" name="Nombre" value="{{name}}" hidden>
+    {%if Primera== 0 %}
+    <input type="checkbox" value="1" name="Primera" id="Primera">
+    {%endif%}
+    <h1>Primera: {{prima}}</h1>
+
+    {%if prima==1 %}
+    <input type="checkbox" value="1" name="Primera" id="Primera" checked>
+    {%endif%}
+    <input type="submit">
+    </form>
+    
+</body>
+</html>
