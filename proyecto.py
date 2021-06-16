@@ -20,44 +20,44 @@ listaNodosInicio = []
 listaNodosFinal = []
 
 primera=0
-PrimeraAux=""
+PrimeraAux=""  #checkboxraiz
 
 exfinal = Flask(__name__)
 
 exfinal.secret_key= 'secretodeamor'
 
 exfinal.config['UPLOAD_FOLDER'] = 'static/Fondos'
-exfinal.config['UPLOAD_FOLDER2'] = 'static/img'
+exfinal.config['UPLOAD_FOLDER2'] = 'static/img' #rutadondeseguardajpg
 
 
 @exfinal.route('/')
 def crear():
-	return render_template("Crear.html")
+	return render_template("index.html")
 
-@exfinal.route('/AgregarNodo',  methods=["POST"])
+@exfinal.route('/AgregarNodo',  methods=["POST"]) #creaciondenodo
 def agregarNodo():
 	if request.method == 'POST':
 		
 		nombre = request.form['nombre']
 		R.add_node(nombre)
-		listaNodosInicio.exfinalend(nombre)
-		listaNodosFinal.exfinalend(nombre)
+		listaNodosInicio.append(nombre)
+		listaNodosFinal.append(nombre)
 		R.nodes[nombre]["Titulo"] = ""
 		R.nodes[nombre]["Texto"] = ""
 		R.nodes[nombre]["Fondo"] = ""
 		R.nodes[nombre]["Imagen"] = ""
 		R.nodes[nombre]["Primera"] = 0
-		return render_template("Crear.html")
+		return render_template("index.html")
 
 
 @exfinal.route('/Unir')
 def unir():
 	
-	return render_template("Unir.html", data=listaNodosInicio, data1=listaNodosFinal)
-
+	return render_template("unirnodo.html", data=listaNodosInicio, data1=listaNodosFinal) #datainformacionquesemandaalaweb
+#unirnodoutilizaelif
 @exfinal.route('/Lista')
 def lista():
-	return render_template("ListaNodos.html", data=R.nodes)
+	return render_template("listadonodos.html", data=R.nodes)
 
 @exfinal.route('/UnirNodos',  methods=["POST"])
 def UnirNodos():
@@ -67,7 +67,7 @@ def UnirNodos():
 		R.add_edge(nombre1, nombre2)
 		listaNodosInicio.remove(nombre1)
 		listaNodosFinal.remove(nombre2)
-		return render_template("Unir.html", data=listaNodosInicio, data1=listaNodosFinal)
+		return render_template("unirnodo.html", data=listaNodosInicio, data1=listaNodosFinal)
 
 @exfinal.route('/EditarInfo',  methods=["POST"])
 def EditarInfo():
@@ -149,7 +149,7 @@ def GuardarInfo():
 def Verdiapositiva():
 	
 	if len(R.nodes)<1:
-		return render_template("VerDiapositiva.html", nohay=-1)
+		return render_template("diapositiva.html", nohay=-1)
 
 	nombre=PrimeraAux
 	Imagen=str(R.nodes[nombre]["Imagen"])
@@ -179,7 +179,7 @@ def Verdiapositiva():
 	print(Antes)
 	print(Siguiente)
 
-	return render_template("VerDiapositiva.html",titulo=Titulo,texto=Texto,fondo=Fondo,imagen=Imagen, name=nombre, sigue=Siguiente, antes=Antes)
+	return render_template("diapositiva.html",titulo=Titulo,texto=Texto,fondo=Fondo,imagen=Imagen, name=nombre, sigue=Siguiente, antes=Antes)
 
 @exfinal.route('/Siguiente/<valor>')
 def Siguiente(valor):
@@ -201,7 +201,7 @@ def Siguiente(valor):
 			Antes=list(R.predecessors(nombre))[0]
 	except:
 		Antes=-1
-	return render_template("VerDiapositiva.html",titulo=Titulo,texto=Texto,fondo=Fondo,imagen=Imagen, name=nombre, sigue=Siguiente, antes=Antes)
+	return render_template("diapositiva.html",titulo=Titulo,texto=Texto,fondo=Fondo,imagen=Imagen, name=nombre, sigue=Siguiente, antes=Antes)
 
 
 @exfinal.route('/Anterior/<valor>')
@@ -224,7 +224,7 @@ def Anterior(valor):
 	except:
 		Antes=-1
 
-	return render_template("VerDiapositiva.html",titulo=Titulo,texto=Texto,fondo=Fondo,imagen=Imagen, name=nombre, sigue=Siguiente, antes=Antes)
+	return render_template("diapositiva.html",titulo=Titulo,texto=Texto,fondo=Fondo,imagen=Imagen, name=nombre, sigue=Siguiente, antes=Antes)
 
 
 @exfinal.route('/VerMatris')
@@ -234,13 +234,13 @@ def Matris():
 	lista=[]
 	lista2=[]
 	for i in R.nodes:
-		Columnas.exfinalend(i)
-		Filas.exfinalend(i)
+		Columnas.append(i)
+		Filas.append(i)
 
 	r = len(Columnas)+1
 	for i in range (r):
-		lista.exfinalend(0)
-		lista2.exfinalend(0)
+		lista.append(0)
+		lista2.append(0)
 
 	#print(lista)
 	listaFinal=[]
@@ -261,7 +261,7 @@ def Matris():
 				x+=1
 		
 		print("Lista a guardar: " + str(lista))
-		listaFinal.exfinalend(lista)
+		listaFinal.append(lista)
 		print("Se vuelven 0 otra vez")
 	
 		
@@ -273,7 +273,7 @@ def proba():
 	A.layout('dot')
 	A.draw('static/nodo.png') 
 	graphviz.Source(A.to_string()) 
-	return render_template("VerNodos.html")
+	return render_template("diagramagrafo.html")
 
 if __name__=="__main__":
 	exfinal.run(port=8000,debug=True)
